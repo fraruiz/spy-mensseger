@@ -4,6 +4,7 @@ import ar.edu.ungs.spymensseger.apps.shared.Application;
 import ar.edu.ungs.spymensseger.apps.swing.SwingApplication;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Map;
 
 public final class Starter {
@@ -36,6 +37,8 @@ public final class Starter {
 	}
 
 	private static Map<String, Class<? extends Application>> applications() {
-		return Map.of("swing", SwingApplication.class);
+		Map<String, Class<? extends Application>> applications = new HashMap<>();
+		applications.put("swing", SwingApplication.class);
+		return applications;
 	}
 }
