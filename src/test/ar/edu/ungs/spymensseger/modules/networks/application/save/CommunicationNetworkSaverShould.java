@@ -1,4 +1,4 @@
-package ar.edu.ungs.spymensseger.modules.networks.application.create;
+package ar.edu.ungs.spymensseger.modules.networks.application.save;
 
 import ar.edu.ungs.spymensseger.modules.communications.application.CommunicationRequest;
 import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;

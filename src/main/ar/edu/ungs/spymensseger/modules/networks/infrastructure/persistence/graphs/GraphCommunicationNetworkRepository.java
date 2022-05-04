@@ -2,11 +2,11 @@ package ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.gra
 
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkRepository;
-import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.FileGraphRepository;
+import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.GraphRepository;
 
 import java.util.Optional;
 
-public final class GraphsCommunicationNetworkRepository extends FileGraphRepository implements CommunicationNetworkRepository {
+public final class GraphCommunicationNetworkRepository extends GraphRepository implements CommunicationNetworkRepository {
 	@Override
 	public void save(CommunicationNetwork network) {
 
