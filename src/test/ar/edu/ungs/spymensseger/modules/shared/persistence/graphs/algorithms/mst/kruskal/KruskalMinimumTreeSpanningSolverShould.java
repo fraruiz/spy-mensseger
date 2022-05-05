@@ -6,10 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 final class KruskalMinimumTreeSpanningSolverShould {
-	private KruskalMinimumTreeSpanningSolver<Integer> solver;
+	private KruskalMinimumTreeSpanningSolver<Integer, Double> solver;
 
 	@BeforeEach
 	void setUp() {
-		this.solver = new KruskalMinimumTreeSpanningSolver<Integer>();
+		this.solver = new KruskalMinimumTreeSpanningSolver<Integer, Double>();
 	}
 }

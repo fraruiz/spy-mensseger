@@ -5,12 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 final class PrimMinimumTreeSpanningSolverShould {
-	private PrimMinimumTreeSpanningSolver<Integer> solver;
+	private PrimMinimumTreeSpanningSolver<Integer, Double> solver;
 
 	@BeforeEach
 	void setUp() {
-		this.solver = new PrimMinimumTreeSpanningSolver<Integer>();
+		this.solver = new PrimMinimumTreeSpanningSolver<Integer, Double>();
 	}
-
-
 }

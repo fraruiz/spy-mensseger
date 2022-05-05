@@ -2,7 +2,7 @@ package ar.edu.ungs.spymensseger.modules.communications.domain;
 
 import java.util.Objects;
 
-public final class Probability {
+public final class Probability implements Comparable<Probability> {
 	private final Double value;
 
 	public Probability() {
@@ -45,5 +45,10 @@ public final class Probability {
 	@Override
 	public String toString() {
 		return "Probability{" + "value=" + value + '}';
+	}
+
+	@Override
+	public int compareTo(Probability o) {
+		return this.value.compareTo(o.value());
 	}
 }

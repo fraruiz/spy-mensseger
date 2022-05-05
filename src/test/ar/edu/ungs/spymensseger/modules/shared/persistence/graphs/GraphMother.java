@@ -1,12 +1,13 @@
 package ar.edu.ungs.spymensseger.modules.shared.persistence.graphs;
 
-import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.AdjacencyMatrixGraph;
 import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.Graph;
 import ar.edu.ungs.spymensseger.shared.domain.DoubleMother;
 
+import java.util.Set;
+
 public final class GraphMother {
-	public static Graph<Integer> random() {
-		Graph<Integer> graph = new AdjacencyMatrixGraph<>(6);
+	public static Graph<Integer, Double> random() {
+		Graph<Integer, Double> graph = new Graph<>(Set.of(0, 1, 2, 3, 4, 5));
 
 		graph.add(0, 1, DoubleMother.random(0D, 1D));
 		graph.add(0, 3, DoubleMother.random(0D, 1D));

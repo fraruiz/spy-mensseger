@@ -3,9 +3,9 @@ package ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.ms
 import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.Graph;
 import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.mst.MinimumTreeSpanningSolver;
 
-public final class KruskalMinimumTreeSpanningSolver<T> implements MinimumTreeSpanningSolver<T> {
+public final class KruskalMinimumTreeSpanningSolver<V, W extends Comparable> implements MinimumTreeSpanningSolver<V, W> {
 	@Override
-	public Graph<T> solve(Graph<T> graph) {
+	public Graph<V, W> solve(Graph<V, W> graph) {
 		return null;
 	}
 }

@@ -2,6 +2,6 @@ package ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.ms
 
 import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.Graph;
 
-public interface MinimumTreeSpanningSolver<T> {
-	Graph<T> solve(Graph<T> graph);
+public interface MinimumTreeSpanningSolver<V, W extends Comparable> {
+	Graph<V, W> solve(Graph<V, W> graph);
 }

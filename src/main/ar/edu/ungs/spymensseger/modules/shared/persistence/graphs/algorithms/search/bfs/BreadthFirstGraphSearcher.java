@@ -3,29 +3,35 @@ package ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.se
 import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.Graph;
 import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.search.GraphSearcher;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Set;
-import java.util.function.BiConsumer;
+import java.util.*;
 import java.util.function.Consumer;
 
-public final class BreadthFirstGraphSearcher<T> implements GraphSearcher<T> {
+public final class BreadthFirstGraphSearcher<T, W extends Comparable> implements GraphSearcher<T, W> {
 	@Override
-	public void search(Graph<T> graph, Integer source, Consumer<Integer> consumer) {
-		boolean[] visited = new boolean[graph.size()];
+	public void search(Graph<T, W> graph, Consumer<T> consumer) {
+		search(graph, graph.random(), consumer);
+	}
 
-		Queue<Integer> queue = new LinkedList<>();
+	@Override
+	public void search(Graph<T, W> graph, T vertex, Consumer<T> consumer) {
+		Queue<T> queue = new LinkedList<>();
+		Map<T, Boolean> visited = new HashMap<>();
 
-		queue.add(source);
+		for (var item: graph.vertexes()) {
+			visited.put(item, false);
+		}
+
+		queue.add(vertex);
 
 		while (!queue.isEmpty()) {
-			Integer vertex = queue.poll();
-			consumer.accept(vertex);
-			visited[vertex] = true;
+			T value = queue.poll();
+			consumer.accept(value);
 
-			Set<Integer> neighbours = graph.neighbours(vertex);
-			for (Integer neighbour : neighbours) {
-				if (!visited[neighbour] && !queue.contains(neighbour)) {
+			visited.put(value, true);
+
+			Set<T> neighbours = graph.neighbours(value);
+			for (T neighbour : neighbours) {
+				if (!visited.get(neighbour) && !queue.contains(neighbour)) {
 					queue.add(neighbour);
 				}
 			}

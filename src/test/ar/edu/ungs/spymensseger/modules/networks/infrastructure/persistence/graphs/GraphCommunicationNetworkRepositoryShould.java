@@ -27,7 +27,7 @@ final class GraphCommunicationNetworkRepositoryShould extends CommunicationNetwo
 	}
 
 	//@Test
-	void find_a_communication_network() {
+	void return_an_existing_communication_network() {
 		CommunicationNetwork expected = CommunicationNetworkMother.random();
 
 		graphRepository.save(expected);
@@ -39,7 +39,7 @@ final class GraphCommunicationNetworkRepositoryShould extends CommunicationNetwo
 	}
 
 	@Test
-	void find_empty_communication_network_when_not_exists() {
+	void not_return_a_non_existing_communication_network() {
 		Optional<CommunicationNetwork> actual = graphRepository.find();
 
 		assertTrue(actual.isEmpty());

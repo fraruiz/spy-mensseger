@@ -4,6 +4,8 @@ import ar.edu.ungs.spymensseger.modules.shared.persistence.graphs.algorithms.Gra
 
 import java.util.function.Consumer;
 
-public interface GraphSearcher<T> {
-	void search(Graph<T> graph, Integer source, Consumer<Integer> consumer);
+public interface GraphSearcher<T, W extends Comparable> {
+	void search(Graph<T, W> graph, Consumer<T> consumer);
+
+	void search(Graph<T, W> graph, T source, Consumer<T> consumer);
 }
