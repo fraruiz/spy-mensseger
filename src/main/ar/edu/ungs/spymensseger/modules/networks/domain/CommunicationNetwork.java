@@ -5,6 +5,7 @@ import ar.edu.ungs.spymensseger.modules.communications.domain.Probability;
 import ar.edu.ungs.spymensseger.modules.spies.domain.Spy;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public final class CommunicationNetwork {
 	private final Probability[][] probabilities;
@@ -96,6 +97,10 @@ public final class CommunicationNetwork {
 
 	public Spy firstSpy() {
 		return this.spies.get(0);
+	}
+
+	public Set<Spy> spies() {
+		return spies.keySet().stream().map(spies::get).collect(Collectors.toSet());
 	}
 
 	public int size() {
