@@ -89,7 +89,10 @@ public class CreateCommunicationNetworkView extends View {
                     if (probability != null) {
                         if (probability < 0 || probability > 1) {
                             showMessageDialog(searchMinimumCommunicationNetworkSpanningButton, String.format("the probability of <%s> and <%s> spies should be between 0 and 1", firstSpy, secondSpy));
-                            break;
+                            communicationsTable.setEnabled(true);
+                            communicationsTable.setCellSelectionEnabled(true);
+                            communicationsTable.setColumnSelectionAllowed(true);
+                            return;
                         }
 
                         CommunicationRequest communicationRequest = new CommunicationRequest(firstSpy, secondSpy, probability);
