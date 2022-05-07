@@ -17,10 +17,11 @@ public final class CommunicationNetworkResponse {
 		this.communications = communications;
 	}
 
-	public static CommunicationNetworkResponse map(CommunicationNetwork communicationNetwork) {
-		Set<CommunicationResponse> communications = new HashSet<>();
-
-		communicationNetwork.communications();
+	public static CommunicationNetworkResponse map(CommunicationNetwork aggregate) {
+		Set<CommunicationResponse> communications = aggregate.communications()
+															 .stream()
+				 											 .map(CommunicationResponse::map)
+															 .collect(Collectors.toSet());
 
 		return new CommunicationNetworkResponse(communications);
 	}

@@ -15,7 +15,11 @@ public final class CommunicationResponse {
 		this.probability = probability;
 	}
 
-	public String firstSpy() {
+	public static CommunicationResponse map(Communication aggregate) {
+		return new CommunicationResponse(aggregate.firstSpy().name(), aggregate.secondSpy().name(), aggregate.probability().value());
+	}
+
+    public String firstSpy() {
 		return firstSpy;
 	}
 

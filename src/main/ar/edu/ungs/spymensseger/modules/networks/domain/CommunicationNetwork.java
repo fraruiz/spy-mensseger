@@ -59,7 +59,7 @@ public final class CommunicationNetwork {
 	}
 
 	public Set<Communication> communications() {
-		Set<Communication> communications = new HashSet<>();
+		Set<Communication> communications = new TreeSet<>();
 
 		for (int i = 0; i < this.probabilities.length; i++) {
 			for (int j = 0; j < this.probabilities[i].length; j++) {
