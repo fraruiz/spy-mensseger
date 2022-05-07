@@ -13,7 +13,7 @@ public final class SpyMother {
 		return build(id, WordMother.random());
 	}
 
-	private static Spy build(Integer id, String name) {
+	public static Spy build(Integer id, String name) {
 		return new Spy(id, name);
 	}
 }

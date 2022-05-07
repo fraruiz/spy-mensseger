@@ -2,14 +2,13 @@ package ar.edu.ungs.spymensseger.modules.networks.domain.mst.prim;
 
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkMother;
-import ar.edu.ungs.spymensseger.modules.networks.domain.mst.MinimumCommunicationNetworkSpanningSolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 final class PrimMinimumCommunicationNetworkSpanningSolverShould {
-	private MinimumCommunicationNetworkSpanningSolver solver;
+	private PrimMinimumCommunicationNetworkSpanningSolver solver;
 
 	@BeforeEach
 	void setUp() {
@@ -18,8 +17,8 @@ final class PrimMinimumCommunicationNetworkSpanningSolverShould {
 
 	@Test
 	void solve_minimum_communication_network_spanning() {
-		CommunicationNetwork network = CommunicationNetworkMother.minimumRandom();
-		CommunicationNetwork expected = CommunicationNetworkMother.undirectedRandom();
+		CommunicationNetwork network = CommunicationNetworkMother.undirectedRandom();
+		CommunicationNetwork expected = CommunicationNetworkMother.minimumRandom();
 
 		CommunicationNetwork actual = this.solver.solve(network);
 

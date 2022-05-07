@@ -1,6 +1,9 @@
 package ar.edu.ungs.spymensseger.modules.networks.application.save;
 
 import ar.edu.ungs.spymensseger.modules.networks.CommunicationNetworksModuleUnitTestCase;
+import ar.edu.ungs.spymensseger.modules.networks.application.CommunicationNetworkRequest;
+import ar.edu.ungs.spymensseger.modules.networks.application.CommunicationNetworkRequestMother;
+import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +19,11 @@ final class CommunicationNetworkSaverShould extends CommunicationNetworksModuleU
 
 	@Test
 	void crete_a_valid_network() {
-	}
+		CommunicationNetworkRequest request = CommunicationNetworkRequestMother.random();
+		CommunicationNetwork expected = CommunicationNetworkRequest.map(request);
 
-	@Test
-	void throws_invalid_probability_when_one_or_more_probabilities_are_not_valid() {
+		saver.save(request);
+
+		shouldSaved(expected);
 	}
 }

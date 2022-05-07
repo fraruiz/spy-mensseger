@@ -49,6 +49,6 @@ public final class Probability implements Comparable<Probability> {
 
 	@Override
 	public int compareTo(Probability o) {
-		return this.value.compareTo(o.value());
+		return this.value().compareTo(o.value());
 	}
 }

@@ -15,8 +15,8 @@ public final class PrimMinimumCommunicationNetworkSpanningSolver implements Mini
 	private Set<Communication> communications;
 
 	public PrimMinimumCommunicationNetworkSpanningSolver() {
-		this.spies = new HashSet<Spy>();
-		this.communications = new HashSet<Communication>();
+		this.spies = new HashSet<>();
+		this.communications = new HashSet<>();
 	}
 
 	@Override
@@ -37,24 +37,11 @@ public final class PrimMinimumCommunicationNetworkSpanningSolver implements Mini
 		return result;
 	}
 
-	private CommunicationNetwork buildCommunicationNetwork() {
-		CommunicationNetwork result = new CommunicationNetwork(this.spies.size());
-		communications.forEach(communication -> result.add(communication.firstSpy(),
-		                                                   communication.secondSpy(),
-		                                                   communication.probability()));
-		return result;
-	}
-
-	private void cleanAttributes() {
-		this.spies = new HashSet<>();
-		this.communications = new HashSet<>();
-	}
-
 	private Communication findMinimumCommunication(CommunicationNetwork network) {
 		return searchCommunicationsWhereOnlyOneVisitedSpy(network)
 				.stream()
 				.min(Communication::compareTo)
-				.orElseThrow(() -> new IllegalArgumentException("can not find a minimum edge"));
+				.orElseThrow(() -> new IllegalArgumentException("can not find a minimum communication"));
 	}
 
 	private Set<Communication> searchCommunicationsWhereOnlyOneVisitedSpy(CommunicationNetwork network) {
@@ -79,5 +66,18 @@ public final class PrimMinimumCommunicationNetworkSpanningSolver implements Mini
 	private boolean isOnlyOneVisitedSpy(Spy spy, Spy neighbour) {
 		return (this.spies.contains(spy) && !this.spies.contains(neighbour)) ||
 		       (this.spies.contains(neighbour) && !this.spies.contains(spy));
+	}
+
+	private CommunicationNetwork buildCommunicationNetwork() {
+		CommunicationNetwork result = new CommunicationNetwork(this.spies.size());
+		communications.forEach(communication -> result.add(communication.firstSpy(),
+		                                                   communication.secondSpy(),
+		                                                   communication.probability()));
+		return result;
+	}
+
+	private void cleanAttributes() {
+		this.spies = new HashSet<>();
+		this.communications = new HashSet<>();
 	}
 }

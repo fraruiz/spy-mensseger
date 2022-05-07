@@ -1,5 +1,6 @@
 package ar.edu.ungs.spymensseger.modules.networks.domain;
 
+import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;
 import ar.edu.ungs.spymensseger.modules.communications.domain.Probability;
 import ar.edu.ungs.spymensseger.modules.spies.domain.Spy;
 
@@ -54,6 +55,22 @@ public final class CommunicationNetwork {
 		}
 
 		return result;
+	}
+
+	public Set<Communication> communications() {
+		Set<Communication> communications = new HashSet<>();
+
+		for (int i = 0; i < this.probabilities.length; i++) {
+			for (int j = 0; j < this.probabilities[i].length; j++) {
+				Optional<Probability> probability = this.probability(this.spies.get(i), this.spies.get(j));
+
+				if (probability.isPresent()) {
+					communications.add(new Communication(this.spies.get(i), this.spies.get(j), probability.get()));
+				}
+			}
+		}
+
+		return communications;
 	}
 
 	private boolean exists(Spy firstSpy, Spy secondSpy) {

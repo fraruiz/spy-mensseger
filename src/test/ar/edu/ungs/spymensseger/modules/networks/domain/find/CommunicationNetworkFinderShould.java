@@ -1,6 +1,10 @@
-package ar.edu.ungs.spymensseger.modules.networks.application.find;
+package ar.edu.ungs.spymensseger.modules.networks.domain.find;
 
 import ar.edu.ungs.spymensseger.modules.networks.CommunicationNetworksModuleUnitTestCase;
+import ar.edu.ungs.spymensseger.modules.networks.application.CommunicationNetworkResponse;
+import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
+import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkMother;
+import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkNotExists;
 import ar.edu.ungs.spymensseger.modules.networks.domain.find.CommunicationNetworkFinder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,9 +25,17 @@ final class CommunicationNetworkFinderShould extends CommunicationNetworksModule
 
 	@Test
 	void find_a_communication_network() {
+		CommunicationNetwork expected = CommunicationNetworkMother.random();
+
+		shouldFind(expected);
+
+		CommunicationNetwork actual = this.finder.find();
+
+		assertEquals(expected, actual);
 	}
 
 	@Test
 	void throws_communication_network_not_exists_when_can_not_find() {
+		assertThrows(CommunicationNetworkNotExists.class, () -> this.finder.find());
 	}
 }

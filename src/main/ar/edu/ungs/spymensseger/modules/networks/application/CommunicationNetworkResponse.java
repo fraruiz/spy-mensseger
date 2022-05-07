@@ -4,6 +4,7 @@ import ar.edu.ungs.spymensseger.modules.communications.application.Communication
 import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -17,7 +18,11 @@ public final class CommunicationNetworkResponse {
 	}
 
 	public static CommunicationNetworkResponse map(CommunicationNetwork communicationNetwork) {
-		return null;
+		Set<CommunicationResponse> communications = new HashSet<>();
+
+		communicationNetwork.communications();
+
+		return new CommunicationNetworkResponse(communications);
 	}
 
 	public Set<CommunicationResponse> communications() {
