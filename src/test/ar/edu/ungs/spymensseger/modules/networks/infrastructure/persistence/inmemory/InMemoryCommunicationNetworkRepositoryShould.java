@@ -1,19 +1,21 @@
-package ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.files;
+package ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.inmemory;
 
 import ar.edu.ungs.spymensseger.modules.networks.CommunicationNetworksModuleInfrastructureTestCase;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkMother;
+import ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.files.FileCommunicationNetworkRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertTrue;
 
-final class FileCommunicationNetworkRepositoryShould extends CommunicationNetworksModuleInfrastructureTestCase {
-	private FileCommunicationNetworkRepository repository;
+final class InMemoryCommunicationNetworkRepositoryShould extends CommunicationNetworksModuleInfrastructureTestCase {
+	private InMemoryCommunicationNetworkRepository repository;
 
 	@BeforeEach
 	void setUp() {
-		this.repository = new FileCommunicationNetworkRepository();
+		this.repository = new InMemoryCommunicationNetworkRepository();
 	}
 
 	@Test
@@ -21,8 +23,6 @@ final class FileCommunicationNetworkRepositoryShould extends CommunicationNetwor
 		CommunicationNetwork aggregate = CommunicationNetworkMother.random();
 
 		repository.save(aggregate);
-
-		repository.clean();
 	}
 
 	@Test
@@ -32,8 +32,6 @@ final class FileCommunicationNetworkRepositoryShould extends CommunicationNetwor
 		repository.save(aggregate);
 
 		assertTrue(repository.find().isPresent());
-
-		repository.clean();
 	}
 
 	@Test
