@@ -1,15 +1,12 @@
 package ar.edu.ungs.spymensseger.modules.networks.application.save;
 
 import ar.edu.ungs.spymensseger.modules.communications.application.CommunicationRequest;
-import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;
-import ar.edu.ungs.spymensseger.modules.communications.domain.Probability;
+import ar.edu.ungs.spymensseger.modules.networks.application.CommunicationNetworkRequest;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkRepository;
-import ar.edu.ungs.spymensseger.modules.spies.application.SpyRequest;
 import ar.edu.ungs.spymensseger.modules.spies.domain.Spy;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public final class CommunicationNetworkSaver {
 	private final CommunicationNetworkRepository repository;
@@ -17,21 +14,29 @@ public final class CommunicationNetworkSaver {
 		this.repository = repository;
 	}
 
-	public void save(SpyRequest spyRequest, List<CommunicationRequest> communicationsRequest) {
-		List<Communication> communications = new ArrayList<>();
+	public void save(CommunicationNetworkRequest request) {
+		Map<String, Spy> spies = mapSpies(request);
+		CommunicationNetwork network = new CommunicationNetwork(spies.size());
 
-		communicationsRequest.forEach(communicationRequest -> {
-			Spy firstSpy = new Spy(spyRequest.name());
-			Spy secondSpy = new Spy(communicationRequest.spy().name());
-			Probability probability = new Probability(communicationRequest.probability());
 
-			Communication communication = new Communication(firstSpy, secondSpy, probability);
+	}
 
-			communications.add(communication);
-		});
+	private Map<String, Spy> mapSpies(CommunicationNetworkRequest request) {
+		Map<String, Spy> spies = new HashMap<>();
 
-		CommunicationNetwork network = new CommunicationNetwork(communications);
+		Integer id = 0;
+		for (CommunicationRequest communicationRequest : request.network()) {
+			if (!spies.containsKey(communicationRequest.firstSpy())) {
+				String name = communicationRequest.firstSpy();
+				spies.put(name, new Spy(id, name));
+			}
 
-		repository.save(network);
+			if (!spies.containsKey(communicationRequest.secondSpy())) {
+				String name = communicationRequest.secondSpy();
+				spies.put(name, new Spy(id, name));
+			}
+		}
+
+		return spies;
 	}
 }

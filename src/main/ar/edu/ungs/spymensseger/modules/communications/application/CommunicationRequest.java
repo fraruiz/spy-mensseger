@@ -1,20 +1,24 @@
 package ar.edu.ungs.spymensseger.modules.communications.application;
 
-import ar.edu.ungs.spymensseger.modules.spies.application.SpyRequest;
-
 import java.util.Objects;
 
 public final class CommunicationRequest {
-	private final SpyRequest spy;
+	private final String firstSpy;
+	private final String secondSpy;
 	private final Double probability;
 
-	public CommunicationRequest(SpyRequest spy, Double probability) {
-		this.spy = spy;
+	public CommunicationRequest(String firstSpy, String secondSpy, Double probability) {
+		this.firstSpy = firstSpy;
+		this.secondSpy = secondSpy;
 		this.probability = probability;
 	}
 
-	public SpyRequest spy() {
-		return spy;
+	public String firstSpy() {
+		return firstSpy;
+	}
+
+	public String secondSpy() {
+		return secondSpy;
 	}
 
 	public Double probability() {
@@ -30,16 +34,18 @@ public final class CommunicationRequest {
 			return false;
 		}
 		CommunicationRequest that = (CommunicationRequest) o;
-		return Objects.equals(spy, that.spy) && Objects.equals(probability, that.probability);
+		return Objects.equals(firstSpy, that.firstSpy) && Objects.equals(secondSpy, that.secondSpy) &&
+		       Objects.equals(probability, that.probability);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(spy, probability);
+		return Objects.hash(firstSpy, secondSpy, probability);
 	}
 
 	@Override
 	public String toString() {
-		return "CommunicationRequest{" + "spy=" + spy + ", probability=" + probability + '}';
+		return "CommunicationRequest{" + "firstSpy=" + firstSpy + ", secondSpy=" + secondSpy + ", probability=" +
+		       probability + '}';
 	}
 }

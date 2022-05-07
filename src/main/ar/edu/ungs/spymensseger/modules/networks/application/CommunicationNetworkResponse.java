@@ -6,23 +6,21 @@ import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public final class CommunicationNetworkResponse {
-	private final List<CommunicationResponse> communications;
+	private final Set<CommunicationResponse> communications;
 
-	public CommunicationNetworkResponse(List<CommunicationResponse> communications) {
+	public CommunicationNetworkResponse(Set<CommunicationResponse> communications) {
 		this.communications = communications;
 	}
 
-	public static CommunicationNetworkResponse map(CommunicationNetwork aggregate) {
-		return new CommunicationNetworkResponse(aggregate.communications()
-		                                                 .stream()
-		                                                 .map(CommunicationResponse::map)
-		                                                 .collect(Collectors.toList()));
+	public static CommunicationNetworkResponse map(CommunicationNetwork communicationNetwork) {
+		return null;
 	}
 
-	public List<CommunicationResponse> communications() {
+	public Set<CommunicationResponse> communications() {
 		return communications;
 	}
 

@@ -15,12 +15,6 @@ public final class CommunicationResponse {
 		this.probability = probability;
 	}
 
-	public static CommunicationResponse map(Communication communication) {
-		return new CommunicationResponse(communication.firstSpy().name(),
-		                                 communication.secondSpy().name(),
-		                                 communication.probability().value());
-	}
-
 	public String firstSpy() {
 		return firstSpy;
 	}

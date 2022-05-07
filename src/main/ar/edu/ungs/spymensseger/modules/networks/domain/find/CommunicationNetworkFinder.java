@@ -1,6 +1,6 @@
-package ar.edu.ungs.spymensseger.modules.networks.application.find;
+package ar.edu.ungs.spymensseger.modules.networks.domain.find;
 
-import ar.edu.ungs.spymensseger.modules.networks.application.CommunicationNetworkResponse;
+import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkNotExists;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkRepository;
 
@@ -11,9 +11,7 @@ public final class CommunicationNetworkFinder {
 		this.repository = repository;
 	}
 
-	public CommunicationNetworkResponse find() {
-		return repository.find()
-		                 .map(CommunicationNetworkResponse::map)
-		                 .orElseThrow(CommunicationNetworkNotExists::new);
+	public CommunicationNetwork find() {
+		return repository.find().orElseThrow(CommunicationNetworkNotExists::new);
 	}
 }

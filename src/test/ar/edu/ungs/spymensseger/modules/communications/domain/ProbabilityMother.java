@@ -7,7 +7,7 @@ public final class ProbabilityMother {
 		return build(DoubleMother.random(0D, 1D));
 	}
 
-	private static Probability build(Double value) {
+	public static Probability build(Double value) {
 		return new Probability(value);
 	}
 

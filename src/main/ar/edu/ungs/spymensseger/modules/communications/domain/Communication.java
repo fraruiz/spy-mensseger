@@ -4,7 +4,7 @@ import ar.edu.ungs.spymensseger.modules.spies.domain.Spy;
 
 import java.util.Objects;
 
-public final class Communication {
+public final class Communication implements Comparable<Communication>{
 	private final Spy firstSpy;
 	private final Spy secondSpy;
 	private final Probability probability;
@@ -36,8 +36,12 @@ public final class Communication {
 			return false;
 		}
 		Communication that = (Communication) o;
-		return Objects.equals(firstSpy, that.firstSpy) && Objects.equals(secondSpy, that.secondSpy) &&
-		       Objects.equals(probability, that.probability);
+
+		boolean a = Objects.equals(firstSpy.id(), that.firstSpy.id()) && Objects.equals(secondSpy.id(), that.secondSpy.id());
+		boolean b = Objects.equals(firstSpy.id(), that.secondSpy.id()) && Objects.equals(secondSpy.id(), that.firstSpy.id());
+		boolean w = Objects.equals(probability, that.probability);
+
+		return (a || b) && w;
 	}
 
 	@Override
@@ -49,5 +53,10 @@ public final class Communication {
 	public String toString() {
 		return "Communication{" + "firstSpy=" + firstSpy + ", secondSpy=" + secondSpy + ", probability=" + probability +
 		       '}';
+	}
+
+	@Override
+	public int compareTo(Communication o) {
+		return this.probability.compareTo(o.probability());
 	}
 }
