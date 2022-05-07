@@ -75,8 +75,7 @@ public class ChooseDatasourceView extends View {
             this.dispose();
 
             EventQueue.invokeLater(() -> {
-                MinimumCommunicationNetworkSpanningSearcher searcher = MinimumCommunicationNetworkSpanningSearcherSingleton.instance(PersistenceType.FILE, MinimumCommunicationNetworkSpanningStrategy.PRIM);
-                View window = new ListMinimumCommunicationNetworkSpanningView(searcher);
+                View window = new ListMinimumCommunicationNetworkSpanningView(PersistenceType.FILE);
                 window.setVisible(true);
             });
         });

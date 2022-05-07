@@ -114,8 +114,7 @@ public class CreateCommunicationNetworkView extends View {
         this.dispose();
 
         EventQueue.invokeLater(() -> {
-            MinimumCommunicationNetworkSpanningSearcher searcher = MinimumCommunicationNetworkSpanningSearcherSingleton.instance(PersistenceType.IN_MEMORY, MinimumCommunicationNetworkSpanningStrategy.PRIM);
-            View window = new ListMinimumCommunicationNetworkSpanningView(searcher);
+            View window = new ListMinimumCommunicationNetworkSpanningView(PersistenceType.IN_MEMORY);
             window.setVisible(true);
         });
     }

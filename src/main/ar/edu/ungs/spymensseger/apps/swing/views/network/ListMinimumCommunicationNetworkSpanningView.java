@@ -4,6 +4,9 @@ import ar.edu.ungs.spymensseger.apps.swing.views.View;
 import ar.edu.ungs.spymensseger.modules.communications.application.CommunicationResponse;
 import ar.edu.ungs.spymensseger.modules.networks.application.CommunicationNetworkResponse;
 import ar.edu.ungs.spymensseger.modules.networks.application.mst.MinimumCommunicationNetworkSpanningSearcher;
+import ar.edu.ungs.spymensseger.modules.networks.domain.mst.MinimumCommunicationNetworkSpanningStrategy;
+import ar.edu.ungs.spymensseger.modules.networks.infrastructure.singleton.MinimumCommunicationNetworkSpanningSearcherSingleton;
+import ar.edu.ungs.spymensseger.modules.shared.persistence.PersistenceType;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,28 +16,45 @@ import java.util.List;
 public class ListMinimumCommunicationNetworkSpanningView extends View {
     private JTable communicationsTable;
     private JLabel titleLabel;
+    private JLabel performanceLabel;
     private JScrollPane jScrollPane1;
+    private final MinimumCommunicationNetworkSpanningSearcher primNetworkSpanningSearcher;
+    private final MinimumCommunicationNetworkSpanningSearcher kruskalNetworkSpanningSearcher;
 
-    private final MinimumCommunicationNetworkSpanningSearcher networkSpanningSearcher;
-    public ListMinimumCommunicationNetworkSpanningView(MinimumCommunicationNetworkSpanningSearcher networkSpanningSearcher) {
+    private double primDuration;
+    private double kruskalDuration;
+    public ListMinimumCommunicationNetworkSpanningView(PersistenceType persistenceType) {
         super();
-        this.networkSpanningSearcher = networkSpanningSearcher;
+
+        this.primNetworkSpanningSearcher = MinimumCommunicationNetworkSpanningSearcherSingleton.instance(persistenceType, MinimumCommunicationNetworkSpanningStrategy.PRIM);
+        this.kruskalNetworkSpanningSearcher = MinimumCommunicationNetworkSpanningSearcherSingleton.instance(persistenceType, MinimumCommunicationNetworkSpanningStrategy.KRUSKAL);
+
+        primDuration = 0D;
+        kruskalDuration = 0D;
 
         initComponents();
     }
 
     private void initComponents() {
         titleLabel = new JLabel();
+        performanceLabel = new JLabel();
         jScrollPane1 = new JScrollPane();
         communicationsTable = new JTable();
 
+        setCommunicationTableProperties();
+
         setTitleLabelProperties();
 
-        setCommunicationTableProperties();
+        setPerformanceLabelProperties();
 
         buildLayout();
 
         pack();
+    }
+
+    private void setPerformanceLabelProperties() {
+        String text = String.format("The performance \n\n - Kruskal algorithm: <%s> seconds \n\n - Prim algorithm: <%s> seconds", kruskalDuration, primDuration);
+        performanceLabel.setText(text);
     }
 
     private void setCommunicationTableProperties() {
@@ -44,9 +64,18 @@ public class ListMinimumCommunicationNetworkSpanningView extends View {
         List<String> secondSpy = new ArrayList<>();
         List<Double> probability = new ArrayList<>();
 
-        CommunicationNetworkResponse networkResponse = networkSpanningSearcher.search();
+        double primStartTime = System.currentTimeMillis();
+        primNetworkSpanningSearcher.search();
+        double primEndTime = System.currentTimeMillis();
+        primDuration = (primEndTime - primStartTime) / 1000;
 
-        for (CommunicationResponse communication : networkResponse.communications()) {
+        double kruskalStartTime = System.currentTimeMillis();
+        CommunicationNetworkResponse kruskalNetworkResponse = kruskalNetworkSpanningSearcher.search();
+        double kruskalEndTime = System.currentTimeMillis();
+        kruskalDuration = (kruskalEndTime - kruskalStartTime) / 1000;
+
+
+        for (CommunicationResponse communication : kruskalNetworkResponse.communications()) {
             firsSpy.add(communication.firstSpy());
             secondSpy.add(communication.secondSpy());
             probability.add(communication.probability());
@@ -94,6 +123,8 @@ public class ListMinimumCommunicationNetworkSpanningView extends View {
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 573, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
+            .addComponent(performanceLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -101,7 +132,10 @@ public class ListMinimumCommunicationNetworkSpanningView extends View {
                 .addComponent(titleLabel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 330, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(performanceLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            )
         );
     }
 
