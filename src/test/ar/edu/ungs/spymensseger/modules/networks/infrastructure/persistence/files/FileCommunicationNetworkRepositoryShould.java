@@ -3,6 +3,7 @@ package ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.fil
 import ar.edu.ungs.spymensseger.modules.networks.CommunicationNetworksModuleInfrastructureTestCase;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkMother;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,11 @@ final class FileCommunicationNetworkRepositoryShould extends CommunicationNetwor
 	@BeforeEach
 	void setUp() {
 		this.repository = new FileCommunicationNetworkRepository();
+	}
+
+	@AfterAll
+	static void afterAll() {
+		new FileCommunicationNetworkRepository().save(CommunicationNetworkMother.undirectedRandom());
 	}
 
 	@Test

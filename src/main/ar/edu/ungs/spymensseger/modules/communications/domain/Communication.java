@@ -57,6 +57,28 @@ public final class Communication implements Comparable<Communication>{
 
 	@Override
 	public int compareTo(Communication o) {
+		if (equals(o)) {
+			return 0;
+		}
+
+		int probabilityCompare = compareProbability(o);
+
+		if (probabilityCompare != 0) {
+			return probabilityCompare;
+		}
+
+		if (this.firstSpy().id() < o.firstSpy().id()) {
+			return -1;
+		}
+
+		if (this.secondSpy.id() < o.secondSpy().id()) {
+			return -1;
+		}
+
+		return 1;
+	}
+
+	public int compareProbability(Communication o) {
 		return this.probability.compareTo(o.probability());
 	}
 }

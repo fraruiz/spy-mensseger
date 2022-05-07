@@ -66,7 +66,8 @@ public final class CommunicationNetwork {
 				Optional<Probability> probability = this.probability(this.spies.get(i), this.spies.get(j));
 
 				if (probability.isPresent()) {
-					communications.add(new Communication(this.spies.get(i), this.spies.get(j), probability.get()));
+					Communication possibleCommunication = new Communication(this.spies.get(i), this.spies.get(j), probability.get());
+					communications.add(possibleCommunication);
 				}
 			}
 		}

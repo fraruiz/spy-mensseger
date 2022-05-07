@@ -40,7 +40,7 @@ public final class PrimMinimumCommunicationNetworkSpanningSolver implements Mini
 	private Communication findMinimumCommunication(CommunicationNetwork network) {
 		return searchCommunicationsWhereOnlyOneVisitedSpy(network)
 				.stream()
-				.min(Communication::compareTo)
+				.min(Communication::compareProbability)
 				.orElseThrow(() -> new IllegalArgumentException("can not find a minimum communication"));
 	}
 

@@ -15,10 +15,10 @@ final class KruskalMinimumCommunicationNetworkSpanningSolverShould {
 		this.solver = new KruskalMinimumCommunicationNetworkSpanningSolver();
 	}
 
-	//@Test
+	@Test
 	void solve_minimum_communication_network_spanning() {
-		CommunicationNetwork network = CommunicationNetworkMother.minimumRandom();
-		CommunicationNetwork expected = CommunicationNetworkMother.undirectedRandom();
+		CommunicationNetwork network = CommunicationNetworkMother.undirectedRandom();
+		CommunicationNetwork expected = CommunicationNetworkMother.minimumRandom();
 
 		CommunicationNetwork actual = this.solver.solve(network);
 
