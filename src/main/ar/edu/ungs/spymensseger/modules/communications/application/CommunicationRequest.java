@@ -34,8 +34,12 @@ public final class CommunicationRequest {
 			return false;
 		}
 		CommunicationRequest that = (CommunicationRequest) o;
-		return Objects.equals(firstSpy, that.firstSpy) && Objects.equals(secondSpy, that.secondSpy) &&
-		       Objects.equals(probability, that.probability);
+
+		boolean a = Objects.equals(firstSpy, that.firstSpy) && Objects.equals(secondSpy, that.secondSpy);
+		boolean b = Objects.equals(firstSpy, that.secondSpy) && Objects.equals(secondSpy, that.firstSpy);
+		boolean c = Objects.equals(probability, that.probability);
+
+		return (a || b)  && c;
 	}
 
 	@Override
