@@ -50,7 +50,7 @@ public final class CommunicationNetwork {
 		Set<Spy> result = new HashSet<>();
 		for (int neighbourId = 0; neighbourId < this.probabilities.length; ++neighbourId) {
 			Spy possibleNeighbour = this.spies.get(neighbourId);
-			if (neighbourId != spy.id() && this.exists(spy, possibleNeighbour)) {
+			if (possibleNeighbour != null && neighbourId != spy.id() && this.exists(spy, possibleNeighbour)) {
 				result.add(possibleNeighbour);
 			}
 		}
