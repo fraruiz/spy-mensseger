@@ -38,6 +38,6 @@ tasks.named('jar') {
     manifest {
         attributes('Implementation-Title': project.name,
                 'Implementation-Version': project.version,
-                'Main-Class': 'ar.edu.ungs.hangman.apps.Starter')
+                'Main-Class': 'ar.edu.ungs.spymensseger.apps.Starter')
     }
 }
