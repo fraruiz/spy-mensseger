@@ -2,9 +2,48 @@ package ar.edu.ungs.spymensseger.modules.networks.domain;
 
 import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;
 import ar.edu.ungs.spymensseger.modules.communications.domain.ProbabilityMother;
+import ar.edu.ungs.spymensseger.modules.spies.domain.Spy;
 import ar.edu.ungs.spymensseger.modules.spies.domain.SpyMother;
 
 public final class CommunicationNetworkMother {
+	public static CommunicationNetwork preset() {
+		CommunicationNetwork network = new CommunicationNetwork(9);
+
+		Spy one = SpyMother.build(0, "spy 1");
+		Spy two = SpyMother.build(1, "spy 2");
+		Spy three = SpyMother.build(2, "spy 3");
+		Spy four = SpyMother.build(3, "spy 4");
+		Spy five = SpyMother.build(4, "spy 5");
+		Spy six = SpyMother.build(5, "spy 6");
+		Spy seven = SpyMother.build(6, "spy 7");
+		Spy eight = SpyMother.build(7, "spy 8");
+		Spy nine = SpyMother.build(8, "spy 9");
+
+		network.add(one, two, ProbabilityMother.build(0.2));
+		network.add(one, three, ProbabilityMother.build(1D));
+
+		network.add(two, five, ProbabilityMother.build(0D));
+		network.add(two, three, ProbabilityMother.build(0.1));
+		network.add(two, four, ProbabilityMother.build(0.3));
+
+		network.add(three, two, ProbabilityMother.build(0.1));
+		network.add(three, four, ProbabilityMother.build(0.5));
+		network.add(three, six, ProbabilityMother.build(0.5));
+
+		network.add(four, seven, ProbabilityMother.build(0.3));
+
+		network.add(five, eight, ProbabilityMother.build(0.2));
+
+		network.add(six, nine, ProbabilityMother.build(0.7));
+
+		network.add(eight, seven, ProbabilityMother.build(0.4));
+
+		network.add(nine, seven, ProbabilityMother.build(0D));
+
+		return network;
+	}
+
+
 	public static CommunicationNetwork undirectedRandom() {
 		CommunicationNetwork network = new CommunicationNetwork(4);
 

@@ -4,6 +4,7 @@ import ar.edu.ungs.spymensseger.modules.networks.CommunicationNetworksModuleInfr
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkMother;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,12 @@ final class FileCommunicationNetworkRepositoryShould extends CommunicationNetwor
 
 	@AfterAll
 	static void afterAll() {
-		new FileCommunicationNetworkRepository().save(CommunicationNetworkMother.undirectedRandom());
+		new FileCommunicationNetworkRepository().save(CommunicationNetworkMother.preset());
+	}
+
+	@BeforeAll
+	static void beforeAll() {
+		new FileCommunicationNetworkRepository().clean();
 	}
 
 	@Test
