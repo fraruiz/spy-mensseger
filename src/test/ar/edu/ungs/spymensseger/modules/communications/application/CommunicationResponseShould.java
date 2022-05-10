@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class CommunicationResponseTest {
+public class CommunicationResponseShould {
 
     @Test
-    public void should_be_equals() {
+    public void be_equals() {
         CommunicationRequest firstCommunicationRequest = new CommunicationRequest("first", "second", 0.5d);
         CommunicationRequest secondCommunicationRequest = new CommunicationRequest("first", "second", 0.5d);
 
@@ -16,7 +16,7 @@ public class CommunicationResponseTest {
     }
 
     @Test
-    public void opposites_should_be_equals() {
+    public void be_opposites_equals() {
         CommunicationRequest firstCommunicationRequest = new CommunicationRequest("second", "first", 0.5d);
         CommunicationRequest secondCommunicationRequest = new CommunicationRequest("first", "second", 0.5d);
 

@@ -1,5 +1,6 @@
 package ar.edu.ungs.spymensseger.modules.networks.domain;
 
+import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;
 import ar.edu.ungs.spymensseger.modules.communications.domain.ProbabilityMother;
 import ar.edu.ungs.spymensseger.modules.spies.domain.SpyMother;
 
@@ -37,5 +38,15 @@ public final class CommunicationNetworkMother {
 
 	public  static CommunicationNetwork withoutEdges(int vertexes) {
 		return new CommunicationNetwork(vertexes);
+	}
+
+	public  static CommunicationNetwork build(int numberOfSpies, Communication ...communications) {
+		CommunicationNetwork network = new CommunicationNetwork(numberOfSpies);
+
+		for (Communication communication : communications) {
+			network.add(communication.firstSpy(), communication.secondSpy(), communication.probability());
+		}
+
+		return network;
 	}
 }
