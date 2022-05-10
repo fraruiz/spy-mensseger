@@ -1,7 +1,7 @@
 package ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.files.dto;
 
 import ar.edu.ungs.spymensseger.modules.spies.domain.Spy;
-import org.json.simple.JSONObject;
+import com.google.gson.JsonObject;
 
 import java.util.Objects;
 
@@ -22,16 +22,16 @@ public final class FileSpy {
 		return new Spy(dto.id(), dto.name());
 	}
 
-	public static JSONObject toJson(FileSpy dto){
-		return new JSONObject() {{
-			put("id", dto.id());
-			put("name", dto.name());
-		}};
+	public static JsonObject toJson(FileSpy dto){
+		JsonObject o = new JsonObject();
+		o.addProperty("id", dto.id());
+		o.addProperty("name", dto.name());
+		return o;
 	}
 
-	public static FileSpy fromJson(JSONObject jsonObject) {
+	public static FileSpy fromJson(JsonObject jsonObject) {
 		return new FileSpy(Integer.valueOf(jsonObject.get("id").toString()),
-		                   (String) jsonObject.get("name"));
+		                   jsonObject.get("name").getAsString());
 	}
 
 	public Integer id() {

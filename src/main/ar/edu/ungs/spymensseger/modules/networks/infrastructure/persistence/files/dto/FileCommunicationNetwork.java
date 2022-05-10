@@ -4,8 +4,8 @@ import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;
 import ar.edu.ungs.spymensseger.modules.communications.domain.Probability;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.spies.domain.Spy;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.util.*;
 
@@ -50,19 +50,19 @@ public final class FileCommunicationNetwork {
 		return communicationNetwork;
 	}
 
-	public static JSONArray toJson(FileCommunicationNetwork dto) {
-		JSONArray jsonArray = new JSONArray();
+	public static JsonArray toJson(FileCommunicationNetwork dto) {
+		JsonArray jsonArray = new JsonArray();
 
 		for (FileSpy fileSpy : dto.communications().keySet()) {
-			JSONObject fileSpyJsonObject = new JSONObject();
-			JSONArray communicationsJsonArray = new JSONArray();
+			JsonObject fileSpyJsonObject = new JsonObject();
+			JsonArray communicationsJsonArray = new JsonArray();
 
 			for (FileCommunication fileCommunication : dto.communications().get(fileSpy)) {
 				communicationsJsonArray.add(FileCommunication.toJson(fileCommunication));
 			}
 
-			fileSpyJsonObject.put("spy", FileSpy.toJson(fileSpy));
-			fileSpyJsonObject.put("communications", communicationsJsonArray);
+			fileSpyJsonObject.add("spy", FileSpy.toJson(fileSpy));
+			fileSpyJsonObject.add("communications", communicationsJsonArray);
 
 			jsonArray.add(fileSpyJsonObject);
 		}
@@ -70,14 +70,14 @@ public final class FileCommunicationNetwork {
 		return jsonArray;
 	}
 
-	public static FileCommunicationNetwork fromJson(JSONArray jsonArray) {
+	public static FileCommunicationNetwork fromJson(JsonArray jsonArray) {
 		FileCommunicationNetwork dto = new FileCommunicationNetwork();
 		for (Object o : jsonArray) {
-			JSONObject jsonObject = (JSONObject) o;
-			FileSpy fileSpy = FileSpy.fromJson((JSONObject) jsonObject.get("spy"));
+			JsonObject jsonObject = (JsonObject) o;
+			FileSpy fileSpy = FileSpy.fromJson((JsonObject) jsonObject.get("spy"));
 			List<FileCommunication> fileCommunications = new ArrayList<>();
-			for (Object communication : ((JSONArray) jsonObject.get("communications"))){
-				fileCommunications.add(FileCommunication.fromJson((JSONObject) communication));
+			for (Object communication : ((JsonArray) jsonObject.get("communications"))){
+				fileCommunications.add(FileCommunication.fromJson((JsonObject) communication));
 			}
 
 			dto.add(fileSpy, fileCommunications);

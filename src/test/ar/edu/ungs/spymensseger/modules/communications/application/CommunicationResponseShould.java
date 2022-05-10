@@ -3,8 +3,6 @@ package ar.edu.ungs.spymensseger.modules.communications.application;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static junit.framework.Assert.assertEquals;
-
 public class CommunicationResponseShould {
 
     @Test

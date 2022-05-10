@@ -2,7 +2,7 @@ package ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.fil
 
 import ar.edu.ungs.spymensseger.modules.communications.domain.Communication;
 import ar.edu.ungs.spymensseger.modules.communications.domain.Probability;
-import org.json.simple.JSONObject;
+import com.google.gson.JsonObject;
 
 import java.util.Objects;
 
@@ -29,18 +29,18 @@ public final class FileCommunication {
 		                         new Probability(dto.probability()));
 	}
 
-	public static JSONObject toJson(FileCommunication dto){
-		return new JSONObject() {{
-			put("firstSpy", FileSpy.toJson(dto.firstSpy()));
-			put("secondSpy", FileSpy.toJson(dto.secondSpy()));
-			put("probability", dto.probability());
-		}};
+	public static JsonObject toJson(FileCommunication dto){
+		JsonObject o = new JsonObject();
+		o.add("firstSpy", FileSpy.toJson(dto.firstSpy()));
+		o.add("secondSpy", FileSpy.toJson(dto.secondSpy()));
+		o.addProperty("probability", dto.probability());
+		return o;
 	}
 
-	public static FileCommunication fromJson(JSONObject jsonObject) {
-		FileSpy firstSpy = FileSpy.fromJson((JSONObject) jsonObject.get("firstSpy"));
-		FileSpy secondSpy = FileSpy.fromJson((JSONObject) jsonObject.get("secondSpy"));
-		Double probability = (Double) jsonObject.get("probability");
+	public static FileCommunication fromJson(JsonObject jsonObject) {
+		FileSpy firstSpy = FileSpy.fromJson((JsonObject) jsonObject.get("firstSpy"));
+		FileSpy secondSpy = FileSpy.fromJson((JsonObject) jsonObject.get("secondSpy"));
+		Double probability = (Double) jsonObject.get("probability").getAsDouble();
 
 		return new FileCommunication(firstSpy, secondSpy, probability);
 	}

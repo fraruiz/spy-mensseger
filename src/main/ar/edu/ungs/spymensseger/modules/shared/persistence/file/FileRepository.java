@@ -1,12 +1,11 @@
 package ar.edu.ungs.spymensseger.modules.shared.persistence.file;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.*;
-import java.nio.file.Paths;
 
 public abstract class FileRepository {
 	private final String fileName;
@@ -16,7 +15,30 @@ public abstract class FileRepository {
 	}
 
 	protected void write(String object) {
-		try (FileWriter file = new FileWriter(fileName)) {
+		try {
+			write("src/main/resources/" + fileName, object);
+		} catch (Exception e) {
+			try {
+				ClassLoader classLoader = getClass().getClassLoader();
+				String filePath = classLoader.getResource(fileName).getPath();
+
+				write(filePath, object);
+			} catch (Exception error) {
+				error.printStackTrace();
+			}
+		}
+	}
+
+	protected void write(JsonElement element) {
+		write(element.toString());
+	}
+
+	public void clean() {
+		write("");
+	}
+
+	private void write(String filePath, String object) {
+		try (FileWriter file = new FileWriter(filePath)) {
 			file.write(object);
 			file.flush();
 
@@ -25,35 +47,34 @@ public abstract class FileRepository {
 		}
 	}
 
-	protected void write(JSONObject object) {
-		write(object.toJSONString());
-	}
+	protected JsonArray read() {
+		try {
+			return read("src/main/resources/" + fileName);
+		} catch (Exception e) {
+			try {
+				ClassLoader classLoader = getClass().getClassLoader();
+				String filePath = classLoader.getResource(fileName).getPath();
 
-	protected void write(JSONArray array) {
-		try (FileWriter file = new FileWriter(fileName)) {
-			file.write(array.toJSONString());
-			file.flush();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	protected JSONArray read() {
-		JSONParser jsonParser = new JSONParser();
-
-		try (FileReader reader = new FileReader(fileName)) {
-			Object obj = jsonParser.parse(reader);
-
-			return (JSONArray) obj;
-		} catch (ParseException | IOException e) {
-			e.printStackTrace();
+				return read(filePath);
+			} catch (Exception error) {
+				e.printStackTrace();
+			}
 		}
 
 		return null;
 	}
 
-	public void clean() {
-		write("");
+	private JsonArray read(String filePath) {
+		JsonParser jsonParser = new JsonParser();
+
+		try (FileReader reader = new FileReader(filePath)) {
+			Object obj = jsonParser.parse(reader);
+
+			return (JsonArray) obj;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }

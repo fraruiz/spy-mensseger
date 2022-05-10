@@ -1,6 +1,4 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
 
 group 'ar.edu.ungs'
 version '1.0'
@@ -10,8 +8,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-    implementation 'com.github.javafaker:javafaker:1.0.2'
+    compile files('libs/gson-2.9.0.jar')
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    testImplementation 'com.github.javafaker:javafaker:1.0.2'
     testImplementation 'org.mockito:mockito-inline:4.5.1'
     testImplementation 'org.mockito:mockito-core:4.5.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
@@ -34,10 +34,13 @@ test {
     useJUnitPlatform()
 }
 
-tasks.named('jar') {
+task fatJar(type: Jar) {
     manifest {
-        attributes('Implementation-Title': project.name,
+        attributes 'Implementation-Title': project.name,
                 'Implementation-Version': project.version,
-                'Main-Class': 'ar.edu.ungs.spymensseger.apps.Starter')
+                'Main-Class': 'ar.edu.ungs.spymensseger.apps.Starter'
     }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }

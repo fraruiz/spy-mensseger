@@ -3,12 +3,11 @@ package ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.inm
 import ar.edu.ungs.spymensseger.modules.networks.CommunicationNetworksModuleInfrastructureTestCase;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetwork;
 import ar.edu.ungs.spymensseger.modules.networks.domain.CommunicationNetworkMother;
-import ar.edu.ungs.spymensseger.modules.networks.infrastructure.persistence.files.FileCommunicationNetworkRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 final class InMemoryCommunicationNetworkRepositoryShould extends CommunicationNetworksModuleInfrastructureTestCase {
 	private InMemoryCommunicationNetworkRepository repository;
