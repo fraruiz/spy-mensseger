@@ -1,12 +1,23 @@
 package ar.edu.ungs.spymensseger.modules.spies.domain;
 
-import ar.edu.ungs.spymensseger.shared.domain.WordMother;
+import ar.edu.ungs.spymensseger.modules.shared.domain.WordMother;
 
 import java.util.List;
+import java.util.Set;
 
 public final class SpyMother {
-	public static List<Spy> randoms() {
-		return List.of(random(0), random(1), random(2), random(3));
+
+	public static Set<Spy> randoms() {
+		return randoms(0);
+	}
+	public static Set<Spy> randoms(Integer fromId) {
+		var first = random(fromId);
+		fromId++;
+		var second = random(fromId);
+		fromId++;
+		var third = random(fromId);
+
+		return Set.of(first, second, third);
 	}
 
 	public static Spy random(Integer id) {

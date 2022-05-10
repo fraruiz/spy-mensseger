@@ -1,6 +1,6 @@
 package ar.edu.ungs.spymensseger.modules.communications.domain;
 
-import ar.edu.ungs.spymensseger.shared.domain.DoubleMother;
+import ar.edu.ungs.spymensseger.modules.shared.domain.DoubleMother;
 
 public final class ProbabilityMother {
 	public static Probability random() {

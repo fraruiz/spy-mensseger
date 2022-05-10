@@ -1,6 +1,5 @@
 package ar.edu.ungs.spymensseger.modules.networks.application;
 
-import ar.edu.ungs.spymensseger.modules.communications.application.CommunicationRequest;
 import ar.edu.ungs.spymensseger.modules.communications.application.CommunicationResponse;
 
 import java.util.HashSet;

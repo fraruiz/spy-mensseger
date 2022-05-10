@@ -1,4 +1,4 @@
-package ar.edu.ungs.spymensseger.shared.domain;
+package ar.edu.ungs.spymensseger.modules.shared.domain;
 
 import com.github.javafaker.Faker;
 
