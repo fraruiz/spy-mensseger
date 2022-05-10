@@ -6,7 +6,7 @@ import ar.edu.ungs.spymensseger.modules.spies.domain.SpyMother;
 import java.util.List;
 
 public final class CommunicationMother {
-	private static Communication build(Spy firstSpy, Spy secondSpy, Probability probability) {
+	public static Communication build(Spy firstSpy, Spy secondSpy, Probability probability) {
 		return new Communication(firstSpy, secondSpy, probability);
 	}
 }

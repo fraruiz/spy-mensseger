@@ -40,6 +40,8 @@ public final class CommunicationResponse {
 			return false;
 		}
 		CommunicationResponse that = (CommunicationResponse) o;
+
+
 		return Objects.equals(firstSpy, that.firstSpy) && Objects.equals(secondSpy, that.secondSpy) &&
 		       Objects.equals(probability, that.probability);
 	}

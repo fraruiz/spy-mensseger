@@ -34,4 +34,8 @@ public final class CommunicationNetworkMother {
 
 		return network;
 	}
+
+	public  static CommunicationNetwork withoutEdges(int vertexes) {
+		return new CommunicationNetwork(vertexes);
+	}
 }
